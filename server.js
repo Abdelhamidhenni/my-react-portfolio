@@ -11,8 +11,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // Serve up static assets
-app.use(express.static("client/build"));
-
+app.use(express.static("client/build/"));
+app.get('*', function(req, res) {
+    res.sendfile('./client/build/index.html');
+});
 var transporter = nodemailer.createTransport({
 		service: "gmail",
 		host: "smtp.gmail.com",
